@@ -1,0 +1,53 @@
+/* 
+    Created on : Sep 10, 2015, 3:16:45 PM
+    Author     : enrique
+*/
+
+body{
+    background-image: url('#{facesContext.externalContext.requestContextPath}/resources/images/fondo.gif');
+    background-size: 100%;
+    background-repeat: repeat;
+}
+
+div.header-organization{
+    background: #2f3f58;
+    color: white;
+    padding: 0.5em;
+    text-align: center;
+    font-weight: bold;
+}
+
+div.inscripcion{
+    background: white;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+div.container-fluid{
+    width: 70%;
+}
+
+div.img-etic{
+    margin: 1em 0 0 0;
+    
+}
+
+div.img-etic .col-sm-14{
+    margin-left: -0.5em;
+    background: white;
+}
+
+div.img-etic img{
+    width: 80%;
+    height: auto;
+    opacity: 1;
+}
+
+div.img-etic p{
+    margin:0.5em;
+    text-align: justify;
+}
+
+div.img-etic h1, div.img-etic h2, div.img-etic h3{
+    margin: 0.2em;
+}

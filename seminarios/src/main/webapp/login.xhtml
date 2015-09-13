@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <style type="text/css">
+            .ui-panel{
+                margin:0 auto 0 auto; 
+                width:390px;
+            }
+        </style>
+        <title>Seminarios | Acceso</title>
+    </h:head>
+    <h:body >
+        <div style="position:absolute;margin-left:30%;height:90px;width:248px;background: URL(resources/img/logo.png) ; ">&nbsp;</div>
+        <div style="left:0px; height:90px;">&nbsp;</div>
+        <p:growl id="mensajes" showDetail="true" life="2000" />
+        <h:form id="loginPage">
+            <!--<form method="POST" action="j_security_check">-->
+            <p:panel header="Login" style="width:400px;">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="username" value="Usuario:" />
+                    <p:inputText value="#{loginBean.username}" id="username"
+                                 required="true" label="username" />
+                    <h:outputLabel for="password" value="Clave:" />
+                    <p:password value="#{loginBean.password}" id="password" required="true"
+                                label="password" />
+                    <f:facet name="footer">
+                        <p:commandButton id="loginButton" value="Login"
+                                         actionListener="#{loginBean.login}" update=":mensajes"
+                                         />
+                    </f:facet>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>

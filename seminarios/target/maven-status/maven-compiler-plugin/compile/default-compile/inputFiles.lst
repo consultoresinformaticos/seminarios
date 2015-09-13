@@ -1,0 +1,9 @@
+/home/enrique/NetBeansProjects/seminarios/src/main/java/py/com/consultoresinformaticos/seminarios/validators/EmailValidator.java
+/home/enrique/NetBeansProjects/seminarios/src/main/java/py/com/consultoresinformaticos/seminarios/bean/SeminarioBean.java
+/home/enrique/NetBeansProjects/seminarios/src/main/java/py/com/consultoresinformaticos/seminarios/converters/InstitucionConverter.java
+/home/enrique/NetBeansProjects/seminarios/src/main/java/py/com/consultoresinformaticos/seminarios/bean/LoginBean.java
+/home/enrique/NetBeansProjects/seminarios/src/main/java/py/com/consultoresinformaticos/seminarios/converters/EventoConverter.java
+/home/enrique/NetBeansProjects/seminarios/src/main/java/py/com/consultoresinformaticos/seminarios/bean/InstitucionBean.java
+/home/enrique/NetBeansProjects/seminarios/src/main/java/py/com/consultoresinformaticos/seminarios/validators/InstitucionValidator.java
+/home/enrique/NetBeansProjects/seminarios/src/main/java/py/com/consultoresinformaticos/seminarios/bean/DisertanteBean.java
+/home/enrique/NetBeansProjects/seminarios/src/main/java/py/com/consultoresinformaticos/seminarios/filter/AuthFileter.java

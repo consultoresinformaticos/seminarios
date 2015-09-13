@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/WEB-INF/base-admin.xhtml">
+        <ui:define name="content">
+            <h:form id="institucion-form">
+                <p:growl id="growl" showDetail="true" sticky="true" />
+
+                <p:dataTable id="dtInst" var="institucion" value="#{institucionBean.instituciones}"
+                             rows="10" paginator="true" paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             selection="#{institucionBean.institucionSelected}" rowKey="#{institucion}"
+                             selectionMode="single">
+
+                    <p:ajax event="rowSelect" listener="#{institucionBean.onRowSelect}" />
+
+                    <p:column headerText="Institucion" sortBy="#{institucion.nombre}">
+                        <h:outputText value="#{institucion.nombre}" />
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton process="dtInst" icon="ui-icon-document"
+                                         value="Agregar" oncomplete="PF('dlgInstAdd').show()" />
+                        <p:commandButton process="dtInst" icon="ui-icon-pencil"
+                                         value="Editar" oncomplete="PF('dlgInstEdit').show()"
+                                         update=":PdglInstEdit" 
+                                         disabled="#{institucionBean.bloquearBotones}"/>
+                        <p:commandButton process="dtInst" icon="ui-icon-trash"
+                                         value="Borrar" actionListener="#{institucionBean.deleteInstitucion}"
+                                         update="dtInst"
+                                         disabled="#{institucionBean.bloquearBotones}">
+                            <p:confirm header="Borrar Institucion"
+                                       message="Estas seguro que queres borrar?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                    </f:facet>
+                </p:dataTable>
+
+                <p:confirmDialog global="true" showEffect="fade"
+                                 hideEffect="explode">
+                    <p:commandButton value="Si" type="button"
+                                     styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button"
+                                     styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+
+            </h:form>
+
+            <p:dialog header="Institucion seleccionada" widgetVar="dlgInstAdd"
+                      modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+
+                <p:panelGrid columns="2" columnClasses="column">
+                    <h:form id="form-add">
+                        <p:outputLabel value="Institucion" for="institucion" />
+                        <p:inputText id="institucion" required="true"
+                                     value="#{institucionBean.institucionSelected.nombre}" />
+                        <p:spacer />
+                        <p:commandButton value="Guardar" action="#{institucionBean.addInstitucion}"
+                                         style="text-align:right; float:right" onclick="dlgInstAdd.hide()"
+                                         update=":institucion-form:dtInst,:institucion-form:growl">
+
+                        </p:commandButton>
+                    </h:form>
+                </p:panelGrid>
+
+            </p:dialog>
+
+            <p:dialog header="Institucion seleccionada" id="PdglInstEdit"
+                      widgetVar="dlgInstEdit" modal="true" showEffect="fade"
+                      hideEffect="fade" resizable="false">
+
+                <p:panelGrid columns="2" columnClasses="column">
+                    <h:form id="form-edit">
+                        <p:outputLabel value="Institucion" for="institucionEdit" />
+                        <p:inputText id="institucionEdit" required="true"
+                                     value="#{institucionBean.institucionSelected.nombre}" />
+                        <p:spacer />
+                        <p:commandButton value="Guardar" action="#{institucionBean.editInstitucion}"
+                                         style="text-align:right; float:right" onclick="dlgInstEdit.hide()"
+                                         update=":institucion-form:dtInst,:institucion-form:growl">
+
+                        </p:commandButton>
+                    </h:form>
+                </p:panelGrid>
+
+            </p:dialog>
+        </ui:define>
+        <ui:define name="footer">
+            <p:panel>
+                Consultores informáticos
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>
