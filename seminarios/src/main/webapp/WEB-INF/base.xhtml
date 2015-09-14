@@ -19,6 +19,11 @@
     </h:head>
     <h:body>
         <div class="container-fluid">
+            <div>
+                <h:form id="form-messages">
+                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                </h:form>
+            </div>
             <div class="header-organization">
                 UNIVERSIDAD NACIONAL DE ASUNCIÓN - FACULTAD POLITÉCNICA
             </div>
@@ -45,25 +50,24 @@
 
                 <h:panelGroup id="seminario-form">
                     <h:form class="form-horizontal">
-                        <p:growl id="mensaje" />
                         <h:panelGroup rendered="#{seminarioBean.inicio}">
                             <h1>Inscripción</h1>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <p:outputLabel value="Nombre" for="nombre" />
-                                    <p:inputText required="true" value="#{seminarioBean.participante.nombre}" class="form-control" id="nombre" a:placeholder="Juan" />
+                                    <p:inputText requiredMessage="El campo Nombre es requerido" required="true" value="#{seminarioBean.participante.nombre}" class="form-control" id="nombre" a:placeholder="Juan" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <p:outputLabel value="Apellido" for="apellido" />
-                                    <p:inputText value="#{seminarioBean.participante.apellido}" class="form-control" id="apellido" a:placeholder="Perez" />
+                                    <p:inputText validatorMessage="El campo Apellido es requerido" requiredMessage="El campo Apellido es requerido" value="#{seminarioBean.participante.apellido}" class="form-control" id="apellido" a:placeholder="Perez" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <p:outputLabel value="Email" for="email" />
-                                    <p:inputText required="true" value="#{seminarioBean.participante.email}" class="form-control" id="email" a:placeholder="juan.perez@email">
+                                    <p:inputText required="true" requiredMessage="El campo email es requerido" validatorMessage="Formato de email no valido." value="#{seminarioBean.participante.email}" class="form-control" id="email" a:placeholder="juan.perez@email">
                                         <f:validator validatorId="emailValidator" />
                                     </p:inputText>
                                 </div>
@@ -80,7 +84,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-12">
-                                    <p:commandButton value="Registrarme"  update=":seminario-form" styleClass="btn btn-default">
+                                    <p:commandButton value="Registrarme"  update=":form-messages:messages :seminario-form" styleClass="btn btn-default">
                                         <f:setPropertyActionListener target="#{seminarioBean.inicio}" value="#{false}" />
                                     </p:commandButton>
                                 </div>
@@ -98,7 +102,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-12">
-                                    <p:commandButton  value="Registrarme" actionListener="#{seminarioBean.guardarEvento}" update="mensaje :seminario-form" styleClass="btn btn-default" />
+                                    <p:commandButton  value="Registrarme" actionListener="#{seminarioBean.guardarEvento}" update=":form-messages:messages :seminario-form" styleClass="btn btn-default" />
                                 </div>
                             </div>
                         </h:panelGroup>
