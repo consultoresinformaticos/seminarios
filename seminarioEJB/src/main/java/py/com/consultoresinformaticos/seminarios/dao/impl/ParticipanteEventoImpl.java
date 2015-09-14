@@ -94,13 +94,14 @@ public class ParticipanteEventoImpl implements ParticipanteEventoDao {
 
                 if (!apllido.trim().equalsIgnoreCase("") && !nombre.trim().equalsIgnoreCase("")) {
                     query += "    AND p.nombre like UPPER(':apellido')";
-                } else {
+                } else if (!apllido.trim().equalsIgnoreCase("")) {
                     query += "  p.nombre like UPPER(':apellido')";
                 }
 
                 if ((!email.trim().equalsIgnoreCase("") && !apllido.trim().equalsIgnoreCase("")) || (!email.trim().equalsIgnoreCase("") && !nombre.equalsIgnoreCase(""))) {
                     query += "    AND p.nombre like UPPER(':email')";
-                } else {
+                } else if(!email.trim().equalsIgnoreCase("")) {
+                    query += "  p.email like UPPER(':email')";
                 }
             }
             Query q = em.createQuery(query);
@@ -108,10 +109,10 @@ public class ParticipanteEventoImpl implements ParticipanteEventoDao {
                 q.setParameter("nombre", nombre);
             }
             if (!apllido.trim().equalsIgnoreCase("")) {
-                q.setParameter("nombre", apllido);
+                q.setParameter("apellido", apllido);
             }
             if (!email.trim().equalsIgnoreCase("")) {
-                q.setParameter("nombre", email);
+                q.setParameter("email", email);
             }
             return q.getResultList();
         } catch (Exception e) {
