@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/WEB-INF/base-admin.xhtml">
+        <ui:define name="content">
+            <h:form id="institucion-form">
+                <p:growl id="growl" showDetail="true" sticky="true" />
+                <div class="buscardor">
+                    <h:panelGrid columns="4">
+
+                        <p:column>
+                            <p:inputText id="nombre" a:placeholder="Nombre" value="#{asistenciaBean.participante.nombre}" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="apellido" a:placeholder="Apellido" value="#{asistenciaBean.participante.apellido}" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="email" a:placeholder="nombre@email.com" value="#{asistenciaBean.participante.email}" />
+                        </p:column>
+                        <p:column style="width: 5em;">
+                            <p:selectOneMenu value="#{asistenciaBean.evento}" converter="eventoConverter">
+                                <f:selectItems value="#{asistenciaBean.eventoList}" 
+                                               var="evento" 
+                                               itemLabel="#{evento.titulo}" 
+                                               itemValue="#{evento}" />
+                            </p:selectOneMenu>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton icon="ui-icon-search" value="Buscar" />
+                        </p:column>
+                    </h:panelGrid>
+                </div>
+
+                <p:dataTable id="dtInst" var="parevent" value="#{asistenciaBean.particpianteEventoList}"
+                             rows="10" paginator="true" paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             selection="#{asistenciaBean.paraticipanteEvento}" rowKey="#{parevent}"
+                             selectionMode="single">
+
+                    <p:column headerText="Asistencia">
+                        <p:inputSwitch value="#{parevent.asistencia}" onLabel="SI" offLabel="NO" style="width: 1.9em;">
+                        </p:inputSwitch>
+                    </p:column>
+                    
+                    <p:column headerText="Nombre" sortBy="#{parevent.participante.nombre}">
+                        <h:outputText value="#{parevent.participante.nombre}" />
+                    </p:column>
+                    <p:column headerText="Apellido" sortBy="#{parevent.participante.apellido}">
+                        <h:outputText value="#{parevent.participante.apellido}" />
+                    </p:column>
+                    <p:column headerText="email" sortBy="#{parevent.participante.email}">
+                        <h:outputText value="#{parevent.participante.email}" />
+                    </p:column>
+                    <p:column headerText="Institución" sortBy="#{parevent.participante.institucionesId.nombre}">
+                        <h:outputText value="#{parevent.participante.institucionesId.nombre}" />
+                    </p:column>
+                </p:dataTable>
+
+                <p:confirmDialog global="true" showEffect="fade"
+                                 hideEffect="explode">
+                    <p:commandButton value="Si" type="button"
+                                     styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button"
+                                     styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+
+            </h:form>
+        </ui:define>
+        <ui:define name="footer">
+            <p:panel>
+                Consultores informáticos
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -17,6 +17,8 @@ import py.com.consultoresinformaticos.seminarios.model.Institucion;
 import py.com.consultoresinformaticos.seminarios.model.Participante;
 import py.com.consultoresinformaticos.seminarios.model.ParticipantesHasEvento;
 import py.com.consultoresinformaticos.seminarios.model.ParticipantesHasEventoPK;
+import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
 
 /**
  *
@@ -76,6 +78,7 @@ public class SeminarioBean implements Serializable {
                     }
                 }
                 limpiar();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha registrado exitosamente.", "PrimeFaces Rocks."));
                 return "index";
             }
 
