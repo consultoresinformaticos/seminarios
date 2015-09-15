@@ -26,7 +26,7 @@ import py.com.consultoresinformaticos.seminarios.model.Participante;
 @Named(value = "asistenciaBean")
 @RequestScoped
 public class AsistenciaBean implements Serializable {
-    
+
     @EJB
     private ParticipanteDao participanteEJB;
     @EJB
@@ -35,10 +35,10 @@ public class AsistenciaBean implements Serializable {
     private EventoDao eventoEJB;
     private List<Evento> eventoList;
     private Participante participante;
-    private ParticipantesHasEvento paraticipanteEvento;
+    private ParticipantesHasEvento participanteEvento;
     private List<ParticipantesHasEvento> particpianteEventoList;
     private Evento evento;
-    
+    private boolean checked;
 
     /**
      * Creates a new instance of AsistenciaBean
@@ -54,12 +54,26 @@ public class AsistenciaBean implements Serializable {
         evento = new Evento();
     }
 
+    public void buscar() {
+        particpianteEventoList = participanteEventoEJB.searchParticipante(participante.getNombre(), participante.getApellido(), participante.getEmail(), evento);
+    }
+    
+    public void checkAsistencia(ParticipantesHasEvento p){
+        if (checked) {
+            p.setAsistencia(1);
+        }
+        else {
+            p.setAsistencia(0);
+        }
+        participanteEventoEJB.update(p);
+    }
+
     public ParticipantesHasEvento getParaticipanteEvento() {
-        return paraticipanteEvento;
+        return participanteEvento;
     }
 
     public void setParaticipanteEvento(ParticipantesHasEvento paraticipanteEvento) {
-        this.paraticipanteEvento = paraticipanteEvento;
+        this.participanteEvento = paraticipanteEvento;
     }
 
     public Participante getParticipante() {
@@ -92,6 +106,14 @@ public class AsistenciaBean implements Serializable {
 
     public void setEvento(Evento evento) {
         this.evento = evento;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
     
 }

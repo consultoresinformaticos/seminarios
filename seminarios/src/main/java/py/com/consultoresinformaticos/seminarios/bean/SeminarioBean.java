@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import org.apache.log4j.Logger;
 import py.com.consultoresinformaticos.seminarios.dao.EventoDao;
 import py.com.consultoresinformaticos.seminarios.dao.InstitucionDao;
@@ -19,13 +20,14 @@ import py.com.consultoresinformaticos.seminarios.model.ParticipantesHasEvento;
 import py.com.consultoresinformaticos.seminarios.model.ParticipantesHasEventoPK;
 import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author enrique
  */
 @ManagedBean(name = "seminarioBean")
-@SessionScoped
+@RequestScoped
 public class SeminarioBean implements Serializable {
 
     @EJB
