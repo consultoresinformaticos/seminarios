@@ -8,6 +8,7 @@ import py.com.consultoresinformaticos.seminarios.dao.ParticipanteEventoDao;
 import py.com.consultoresinformaticos.seminarios.model.ParticipantesHasEvento;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+import py.com.consultoresinformaticos.seminarios.model.Evento;
 
 /**
  *
@@ -79,41 +80,52 @@ public class ParticipanteEventoImpl implements ParticipanteEventoDao {
     }
 
     @Override
-    public List<ParticipantesHasEvento> searchParticipante(String nombre, String apllido, String email) {
+    public List<ParticipantesHasEvento> searchParticipante(String nombre, String apellido, String email, Evento evento) {
         try {
 
             String query = "select pe from ParticipantesHasEvento pe \n"
                     + "    LEFT JOIN pe.participante p \n"
                     + "    LEFT JOIN pe.evento e \n";
-            if (!nombre.trim().equalsIgnoreCase("") || !apllido.trim().equalsIgnoreCase("") || !email.trim().equalsIgnoreCase("")) {
+            if (!nombre.trim().equalsIgnoreCase("") || !apellido.trim().equalsIgnoreCase("") || !email.trim().equalsIgnoreCase("") || (evento != null)){
                 query += "where \n";
 
                 if (!nombre.trim().equalsIgnoreCase("")) {
-                    query += "  p.nombre like UPPER(':nombre')";
+                    query += "  p.nombre like UPPER(:nombre)";
                 }
 
-                if (!apllido.trim().equalsIgnoreCase("") && !nombre.trim().equalsIgnoreCase("")) {
-                    query += "    AND p.nombre like UPPER(':apellido')";
-                } else if (!apllido.trim().equalsIgnoreCase("")) {
-                    query += "  p.nombre like UPPER(':apellido')";
+                if (!apellido.trim().equalsIgnoreCase("") && !nombre.trim().equalsIgnoreCase("")) {
+                    query += "    AND p.apellido like UPPER(:apellido)";
+                } else if (!apellido.trim().equalsIgnoreCase("")) {
+                    query += "  p.apellido like UPPER(:apellido)";
                 }
 
-                if ((!email.trim().equalsIgnoreCase("") && !apllido.trim().equalsIgnoreCase("")) || (!email.trim().equalsIgnoreCase("") && !nombre.equalsIgnoreCase(""))) {
-                    query += "    AND p.nombre like UPPER(':email')";
+                if ((!email.trim().equalsIgnoreCase("") && !apellido.trim().equalsIgnoreCase("")) || (!email.trim().equalsIgnoreCase("") && !nombre.equalsIgnoreCase(""))) {
+                    query += "    AND p.email like UPPER(:email)";
                 } else if(!email.trim().equalsIgnoreCase("")) {
-                    query += "  p.email like UPPER(':email')";
-                }
+                    query += "  p.email like UPPER(:email)";
+                } 
+                
+                if ((email.trim().equalsIgnoreCase("") && apellido.trim().equalsIgnoreCase("") && nombre.trim().equalsIgnoreCase("")) && (evento.getId() != null)) {
+                    query += " e.id = (:evento_id)";
+                }        
+                else if (evento.getId() != null) {
+                    query += " AND e.id = (:evento_id)";
+                } 
             }
             Query q = em.createQuery(query);
             if (!nombre.trim().equalsIgnoreCase("")) {
                 q.setParameter("nombre", nombre);
             }
-            if (!apllido.trim().equalsIgnoreCase("")) {
-                q.setParameter("apellido", apllido);
+            if (!apellido.trim().equalsIgnoreCase("")) {
+                q.setParameter("apellido", apellido);
             }
             if (!email.trim().equalsIgnoreCase("")) {
                 q.setParameter("email", email);
             }
+            if (evento.getId() != null) {
+                q.setParameter("evento_id", evento.getId());
+            } 
+            
             return q.getResultList();
         } catch (Exception e) {
             logger.error("CLASS " + this.getClass().getName() + " METHOD: searchParticipante ", e);
