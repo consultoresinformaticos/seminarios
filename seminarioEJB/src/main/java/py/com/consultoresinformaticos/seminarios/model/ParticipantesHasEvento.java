@@ -76,7 +76,7 @@ public class ParticipantesHasEvento implements Serializable {
     public void setAsistencia(int asistencia) {
         this.asistencia = asistencia;
     }
-
+    
     public Participante getParticipante() {
         return participante;
     }
