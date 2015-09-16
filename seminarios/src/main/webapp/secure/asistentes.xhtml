@@ -6,7 +6,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition template="/WEB-INF/base-admin.xhtml">
         <ui:define name="content">
             <h:form id="institucion-form">
@@ -15,10 +16,14 @@
                     <h:panelGrid columns="4">
 
                         <p:column>
-                            <p:inputText id="nombre" a:placeholder="Nombre" value="#{asistenciaBean.participante.nombre}" />
+                            <p:inputText required="false" id="nombre" a:placeholder="Nombre" value="#{asistenciaBean.participante.nombre}">
+                                <f:validateBean disabled="true" />
+                            </p:inputText>
                         </p:column>
                         <p:column>
-                            <p:inputText id="apellido" a:placeholder="Apellido" value="#{asistenciaBean.participante.apellido}" />
+                            <p:inputText id="apellido" required="false" a:placeholder="Apellido" value="#{asistenciaBean.participante.apellido}">
+                                <f:validateBean disabled="true" />
+                            </p:inputText>
                         </p:column>
                         <p:column>
                             <p:inputText id="email" a:placeholder="nombre@email.com" value="#{asistenciaBean.participante.email}" />
@@ -32,23 +37,27 @@
                             </p:selectOneMenu>
                         </p:column>
                         <p:column>
-                            <p:commandButton icon="ui-icon-search" value="Buscar" />
+                            <p:commandButton icon="ui-icon-search" ajax="false" value="Buscar" action="#{asistenciaBean.buscar}" update="..dtInst" />
                         </p:column>
                     </h:panelGrid>
                 </div>
-
+            </h:form>
+            <h:form>
                 <p:dataTable id="dtInst" var="parevent" value="#{asistenciaBean.particpianteEventoList}"
                              rows="10" paginator="true" paginatorPosition="bottom"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15"
                              selection="#{asistenciaBean.paraticipanteEvento}" rowKey="#{parevent}"
-                             selectionMode="single">
-
+                             selectionMode="single" >
+                    <p:commandButton id="enviar">
+                        <f:setPropertyActionListener target="#{asistenciaBean.paraticipanteEvento}" value="#{parevent}" />
+                    </p:commandButton>
                     <p:column headerText="Asistencia">
-                        <p:inputSwitch value="#{parevent.asistencia}" onLabel="SI" offLabel="NO" style="width: 1.9em;">
+                        <p:inputSwitch onLabel="SI" offLabel="NO" style="width: 1.9em;" value="#{asistenciaBean.checked}">
+                            <p:ajax listener="#{asistenciaBean.checkAsistencia(parevent)}" event="change" />
                         </p:inputSwitch>
                     </p:column>
-                    
+
                     <p:column headerText="Nombre" sortBy="#{parevent.participante.nombre}">
                         <h:outputText value="#{parevent.participante.nombre}" />
                     </p:column>
