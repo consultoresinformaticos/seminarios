@@ -8,8 +8,8 @@ py/com/consultoresinformaticos/seminarios/model/Disertante.class
 py/com/consultoresinformaticos/seminarios/dao/impl/ParticipanteEventoImpl.class
 py/com/consultoresinformaticos/seminarios/model/Usuario.class
 py/com/consultoresinformaticos/seminarios/dao/impl/DisertanteImpl.class
-py/com/consultoresinformaticos/seminarios/dao/impl/PantallaImpl.class
 py/com/consultoresinformaticos/seminarios/dao/DisertanteDao.class
+py/com/consultoresinformaticos/seminarios/dao/impl/PantallaImpl.class
 py/com/consultoresinformaticos/seminarios/model/Seminario.class
 py/com/consultoresinformaticos/seminarios/dao/RolDao.class
 py/com/consultoresinformaticos/seminarios/dao/InstitucionDao.class
@@ -20,8 +20,8 @@ py/com/consultoresinformaticos/seminarios/model/Rol.class
 py/com/consultoresinformaticos/seminarios/dao/ParticipanteEventoDao.class
 py/com/consultoresinformaticos/seminarios/dao/PantallaDao.class
 py/com/consultoresinformaticos/seminarios/dao/impl/ParticipanteImpl.class
-py/com/consultoresinformaticos/seminarios/dao/impl/InstitucionImpl.class
 py/com/consultoresinformaticos/seminarios/dao/ParticipanteDao.class
+py/com/consultoresinformaticos/seminarios/dao/impl/InstitucionImpl.class
 py/com/consultoresinformaticos/seminarios/dao/impl/RolImpl.class
 py/com/consultoresinformaticos/seminarios/model/ParticipantesHasEvento.class
 py/com/consultoresinformaticos/seminarios/model/Evento.class

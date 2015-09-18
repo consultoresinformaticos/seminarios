@@ -99,4 +99,15 @@ public class UsuarioImpl implements UsuarioDao {
 		return null;
 	}
 
+    @Override
+    public Usuario getByUserName(String userName) {
+       
+        try {
+            return (Usuario) em.createNamedQuery("Usuario.findByUsername").setParameter("username", userName).getSingleResult();
+        } catch (Exception e) {
+            logger.error("CLASS " + this.getClass().getName() + " METHOD: delete ", e);
+            return null;
+        }
+    }
+
 }

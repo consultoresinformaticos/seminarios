@@ -9,4 +9,5 @@ import py.com.consultoresinformaticos.seminarios.model.Usuario;
 @Remote
 public interface UsuarioDao extends GenericDao<Usuario, Integer>{
     public Usuario autenticate(String username, String password);
+    public Usuario getByUserName(String userName);
 }
