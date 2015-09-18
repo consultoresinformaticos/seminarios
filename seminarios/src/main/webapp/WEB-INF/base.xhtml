@@ -50,7 +50,7 @@
 
                 <h:panelGroup id="seminario-form">
                     <h:form class="form-horizontal">
-                        <h:panelGroup rendered="#{seminarioBean.inicio}">
+                        <h:panelGroup rendered="#{!seminarioBean.inicio}">
                             <h1>Inscripción</h1>
                             <div class="form-group">
                                 <div class="col-sm-12">
@@ -90,13 +90,13 @@
                                 </div>
                             </div>
                         </h:panelGroup>
-                        <h:panelGroup rendered="#{!seminarioBean.inicio}">
+                        <h:panelGroup rendered="#{seminarioBean.inicio}">
                             <h:inputHidden value="#{seminarioBean.participante.id}" />
                             <div class="form-group">
                                 <div class="checkbox col-sm-12" style="margin-left: 1em;">
-                                    <h:selectManyCheckbox value="#{seminarioBean.eventoSeleccionadosList}" converter="eventoConverter">
+                                    <p:selectManyCheckbox layout="grid" columns="1" value="#{seminarioBean.eventoSeleccionadosList}" converter="eventoConverter">
                                         <f:selectItems value="#{seminarioBean.eventoList}" var="evento" itemValue="#{evento}" itemLabel="#{evento.titulo}" />
-                                    </h:selectManyCheckbox>
+                                    </p:selectManyCheckbox>
                                 </div>
                             </div>
 

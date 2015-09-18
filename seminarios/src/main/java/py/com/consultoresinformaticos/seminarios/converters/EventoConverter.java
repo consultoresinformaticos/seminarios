@@ -39,7 +39,7 @@ public class EventoConverter implements Converter {
             Evento evento = eventoEjb.getByName(value);
             return evento;
         } catch (Exception e) {
-            logger.error("CLASS "+this.getClass().getName()+" METHOD: create ", e);
+            logger.error("CLASS "+this.getClass().getName()+" METHOD: getAsObject ", e);
         }
 
         return null;
@@ -55,7 +55,7 @@ public class EventoConverter implements Converter {
         try {
             return evento.getTitulo();
         } catch (Exception e) {
-            logger.error("CLASS "+this.getClass().getName()+" METHOD: create ", e);
+            logger.error("CLASS "+this.getClass().getName()+" METHOD: getAsString ", e);
             return null;
         }
     }

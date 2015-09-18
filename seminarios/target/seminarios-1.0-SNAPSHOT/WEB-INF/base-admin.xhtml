@@ -6,6 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Seminarios | Administración</title>
+        <h:outputStylesheet library="css" name="style-admin.css" />
     </h:head>
     <h:body>
         <h:form id="base">
@@ -14,6 +15,8 @@
                 <p:menuitem value="Home" action="home" />
                 <p:submenu label="Mantenimiento" icon="ui-icon-document">
                     <p:menuitem value="Instituciones" action="institucion" />
+                    <p:menuitem value="Usuarios" action="usuarios" />
+                    <p:menuitem value="Asistentes" action="asistentes" />
                 </p:submenu>
                 <f:facet name="options">
                     <p:commandButton value="Logout" icon="ui-icon-extlink" action="#{loginBean.logout}" ajax="false" />

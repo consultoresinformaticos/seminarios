@@ -9,7 +9,6 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import java.io.Serializable;
 import java.util.List;
-import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import py.com.consultoresinformaticos.seminarios.dao.ParticipanteDao;
 import py.com.consultoresinformaticos.seminarios.model.ParticipantesHasEvento;
