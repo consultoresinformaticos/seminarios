@@ -50,7 +50,7 @@
 
                 <h:panelGroup id="seminario-form">
                     <h:form class="form-horizontal">
-                        <h:panelGroup rendered="#{!seminarioBean.inicio}">
+                        <h:panelGroup rendered="#{seminarioBean.inicio}">
                             <h1>Inscripción</h1>
                             <div class="form-group">
                                 <div class="col-sm-12">
@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-12">
                                     <p:commandButton value="Registrarme"  update=":form-messages:messages :seminario-form" styleClass="btn btn-default">
-                                        <f:setPropertyActionListener target="#{seminarioBean.inicio}" value="#{false}" />
+                                        <f:setPropertyActionListener target="#{!seminarioBean.inicio}" value="#{false}" />
                                     </p:commandButton>
                                 </div>
                             </div>
