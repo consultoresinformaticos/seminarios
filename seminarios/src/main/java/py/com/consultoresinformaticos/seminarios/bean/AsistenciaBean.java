@@ -56,7 +56,7 @@ public class AsistenciaBean implements Serializable {
     public void buscar() {
         particpianteEventoList = participanteEventoEJB.searchParticipante(participante.getNombre(), participante.getApellido(), participante.getEmail(), evento);
     }
-    
+      
     public void checkAsistencia(ParticipantesHasEvento p){
         if (checked) {
             p.setAsistencia(1);
