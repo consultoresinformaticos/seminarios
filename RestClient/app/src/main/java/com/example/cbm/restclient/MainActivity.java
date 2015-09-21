@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if (isOnline())
         {
-            requestData("http://192.168.1.103:8080/WsSeminario/webresources/py.com.consultoresinformaticos.seminarios.model.disertante/");
+            requestData("http://192.168.0.113:8080/WsSeminario/webresources/py.com.consultoresinformaticos.seminarios.model.disertante/");
         }
         else
         {
