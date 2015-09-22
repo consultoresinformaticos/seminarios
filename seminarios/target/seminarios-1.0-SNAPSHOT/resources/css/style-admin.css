@@ -1,0 +1,11 @@
+/* 
+    Created on : Sep 13, 2015, 10:27:20 PM
+    Author     : enrique
+*/
+div.buscardor{
+    margin: 0.5em 0;
+}
+
+div.buscardor table{
+    width: 100% !important;
+}

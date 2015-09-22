@@ -17,6 +17,7 @@ import py.com.consultoresinformaticos.seminarios.dao.EventoDao;
 import py.com.consultoresinformaticos.seminarios.dao.ParticipanteEventoDao;
 import py.com.consultoresinformaticos.seminarios.model.Evento;
 import py.com.consultoresinformaticos.seminarios.model.Participante;
+import py.com.consultoresinformaticos.util.SendMail;
 
 /**
  *

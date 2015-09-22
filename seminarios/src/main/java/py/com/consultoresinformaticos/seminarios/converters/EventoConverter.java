@@ -4,19 +4,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
 import javax.faces.convert.Converter;
-import py.com.consultoresinformaticos.seminarios.dao.InstitucionDao;
-import py.com.consultoresinformaticos.seminarios.model.Institucion;
 import javax.ejb.EJB;
 import org.apache.log4j.Logger;
 import py.com.consultoresinformaticos.seminarios.dao.EventoDao;
 import py.com.consultoresinformaticos.seminarios.dao.impl.DisertanteImpl;
 import py.com.consultoresinformaticos.seminarios.model.Evento;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author enrique

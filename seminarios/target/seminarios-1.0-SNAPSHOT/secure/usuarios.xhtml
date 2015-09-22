@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/WEB-INF/base-admin.xhtml">
+        <ui:define name="content">
+            <h:form id="institucion-form">
+                <p:growl id="growl" showDetail="true" sticky="true" />
+
+                <p:dataTable id="dtInst" var="usuario" value="#{usuarioBean.listUsuario}"
+                             rows="10" paginator="true" paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             selection="#{usuarioBean.usuario}" rowKey="#{usuario}"
+                             selectionMode="single">
+
+                    <p:ajax event="rowSelect" listener="#{usuarioBean.onRowSelect}" />
+
+                    <p:column headerText="usuario" sortBy="#{usuario.username}">
+                        <h:outputText value="#{usuario.username}" />
+                    </p:column>
+                    <p:column headerText="Rol" sortBy="#{usuario.rol.descripcion}">
+                        <h:outputText value="#{usuario.rol.descripcion}" />
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton process="dtInst" icon="ui-icon-document"
+                                         value="Agregar" oncomplete="PF('dlgInstAdd').show()" />
+                        <p:commandButton process="dtInst" icon="ui-icon-pencil"
+                                         value="Editar" oncomplete="PF('dlgInstEdit').show()"
+                                         update=":PdglInstEdit" 
+                                         disabled="#{usuarioBean.bloquearBotones}"/>
+                        <p:commandButton process="dtInst" icon="ui-icon-trash"
+                                         value="Borrar" actionListener="#{usuarioBean.borrar}"
+                                         update="dtInst"
+                                         disabled="#{usuarioBean.bloquearBotones}">
+                            <p:confirm header="Borrar Institucion"
+                                       message="Estas seguro que queres borrar?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                    </f:facet>
+                </p:dataTable>
+
+                <p:confirmDialog global="true" showEffect="fade"
+                                 hideEffect="explode">
+                    <p:commandButton value="Si" type="button"
+                                     styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button"
+                                     styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </h:form>
+
+            <p:dialog header="Registrar Usuario" widgetVar="dlgInstAdd"
+                      modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <h:form id="form-add">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="Nombre: " for="username" />
+                        <p:inputText id="username" required="true"
+                                     value="#{usuarioBean.usuario.username}" />
+                        <p:outputLabel value="Password" for="password" />
+                        <p:inputText id="password" required="true" value="#{usuarioBean.usuario.password}" />
+                        <p:outputLabel value="Rol: " for="roli" />
+                        <p:selectOneMenu id="roli" value="#{usuarioBean.usuario.rol}" style="width:125px">
+                            <f:selectItems value="#{usuarioBean.listRol}" var="roli" itemValue="#{roli}" itemLabel="#{roli.descripcion}" />
+                        </p:selectOneMenu>
+
+                        <p:spacer/>
+                        <p:commandButton value="Guardar" action="#{usuarioBean.guardar}"
+                                         style="text-align:right; float:right" onclick="dlgInstAdd.hide()"
+                                         update=":institucion-form:dtInst,:institucion-form:growl">
+
+                        </p:commandButton>
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Institucion seleccionada2" id="PdglInstEdit"
+                      widgetVar="dlgInstEdit" modal="true" showEffect="fade"
+                      hideEffect="fade" resizable="false">
+
+                <p:panelGrid columns="2" columnClasses="column">
+                    <h:form id="form-edit">
+                        <p:outputLabel value="Institucion" for="institucionEdit" />
+                        <p:inputText id="institucionEdit" required="true"
+                                     value="#{usuarioBean.usuario.username}" />
+                        <p:spacer />
+                        <p:commandButton value="Guardar" action="#{usuarioBean.guardar}"
+                                         style="text-align:right; float:right" onclick="dlgInstEdit.hide()"
+                                         update=":institucion-form:dtInst,:institucion-form:growl">
+
+                        </p:commandButton>
+                    </h:form>
+                </p:panelGrid>
+
+            </p:dialog>
+        </ui:define>
+        <ui:define name="footer">
+            <p:panel>
+                Consultores informáticos
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>
