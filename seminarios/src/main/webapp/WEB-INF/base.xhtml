@@ -49,25 +49,25 @@
             <div class="col-sm-4 inscripcion">
 
                 <h:panelGroup id="seminario-form">
-                    <h:form class="form-horizontal">
+                    <h:form styleClass="form-horizontal">
                         <h:panelGroup rendered="#{seminarioBean.inicio}">
                             <h1>Inscripción</h1>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <p:outputLabel value="Nombre" for="nombre" />
-                                    <p:inputText requiredMessage="El campo Nombre es requerido" required="true" value="#{seminarioBean.participante.nombre}" class="form-control" id="nombre" a:placeholder="Juan" />
+                                    <p:inputText requiredMessage="El campo Nombre es requerido" required="true" value="#{seminarioBean.participante.nombre}" styleClass="form-control" id="nombre" a:placeholder="Juan" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <p:outputLabel value="Apellido" for="apellido" />
-                                    <p:inputText validatorMessage="El campo Apellido es requerido" requiredMessage="El campo Apellido es requerido" value="#{seminarioBean.participante.apellido}" class="form-control" id="apellido" a:placeholder="Perez" />
+                                    <p:inputText validatorMessage="El campo Apellido es requerido" requiredMessage="El campo Apellido es requerido" value="#{seminarioBean.participante.apellido}" styleClass="form-control" id="apellido" a:placeholder="Perez" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <p:outputLabel value="Email" for="email" />
-                                    <p:inputText required="true" requiredMessage="El campo email es requerido" validatorMessage="Formato de email no valido." value="#{seminarioBean.participante.email}" class="form-control" id="email" a:placeholder="juan.perez@email">
+                                    <p:inputText required="true" requiredMessage="El campo email es requerido" validatorMessage="Formato de email no valido." value="#{seminarioBean.participante.email}" styleClass="form-control" id="email" a:placeholder="juan.perez@email">
                                         <f:validator validatorId="emailValidator" />
                                     </p:inputText>
                                 </div>
